@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jackie's World — Art & Robotics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #FAF8F4;
+      --ink: #1C1C1C;
+      --ink-light: #555550;
+      --ink-muted: #999890;
+      --accent: #B85C38;
+      --accent-light: #E8C5B5;
+      --border: #E8E6E0;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,244,0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 3rem; display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.2rem; font-style: italic; color: var(--ink); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 90vh; display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; max-width: 1200px; margin: 0 auto; padding: 4rem 3rem; gap: 5rem;
+    }
+    .hero-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+    .hero-title { font-family: var(--serif); font-size: clamp(3.5rem,6vw,5.5rem); font-weight: 500; line-height: 1.05; margin-bottom: 1.5rem; }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-desc { font-size: 1.05rem; color: var(--ink-light); max-width: 420px; line-height: 1.75; font-weight: 300; margin-bottom: 2.5rem; }
+    .hero-links { display: flex; gap: 1.5rem; align-items: center; }
+    .link-primary { display: inline-block; padding: 12px 28px; background: var(--ink); color: white; text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; }
+    .link-primary:hover { background: var(--accent); }
+    .link-secondary { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+    .link-secondary:hover { color: var(--accent); border-color: var(--accent); }
+    .hero-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+    .hero-caption { margin-top: 0.8rem; font-size: 0.72rem; color: var(--ink-muted); letter-spacing: 0.05em; text-align: right; }
+
+    /* DIVIDER */
+    .divider { border: none; border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
+
+    /* SECTION */
+    .section { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
+    .section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.6rem; }
+    .section-title { font-family: var(--serif); font-size: clamp(2.2rem,4vw,3.5rem); font-weight: 500; line-height: 1.1; }
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3.5rem; }
+    .about-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
+    .about-text { padding-top: 1rem; }
+    .about-text p { font-size: 1rem; color: var(--ink-light); line-height: 1.8; font-weight: 300; margin-bottom: 1.2rem; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2rem; }
+    .about-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; border: 1px solid var(--border); color: var(--ink-light); }
+
+    /* ARTWORK */
+    .artwork-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+    .year-tabs { display: flex; border: 1px solid var(--border); }
+    .year-tab { padding: 8px 22px; border: none; background: none; font-family: var(--sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); cursor: pointer; transition: all 0.2s; border-right: 1px solid var(--border); }
+    .year-tab:last-child { border-right: none; }
+    .year-tab.active, .year-tab:hover { background: var(--ink); color: white; }
+    .artwork-year-panel { display: none; }
+    .artwork-year-panel.active { display: block; }
+    .artwork-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 2px; }
+
+    .artwork-card { position: relative; cursor: pointer; overflow: hidden; background: var(--border); }
+    .artwork-card:hover .artwork-overlay { opacity: 1; }
+    .artwork-card:hover .artwork-thumb { transform: scale(1.03); }
+    .artwork-thumb { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .artwork-overlay {
+      position: absolute; inset: 0; background: rgba(28,28,28,0.78); opacity: 0; transition: opacity 0.3s;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 1.4rem;
+    }
+    .overlay-title { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: white; margin-bottom: 0.4rem; line-height: 1.2; }
+    .overlay-badge { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.04em; color: var(--accent-light); line-height: 1.5; }
+
+    .artwork-info { padding: 0.85rem 0 0; }
+    .artwork-title { font-family: var(--serif); font-size: 0.98rem; font-style: italic; color: var(--ink); margin-bottom: 4px; }
+    .artwork-desc { font-size: 0.78rem; color: var(--ink-muted); line-height: 1.65; margin-top: 6px; font-weight: 300; }
+    .artwork-award-item { font-size: 0.68rem; color: var(--accent); font-weight: 500; letter-spacing: 0.03em; display: block; line-height: 1.6; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(15,15,15,0.92); align-items: center; justify-content: center; padding: 2rem; }
+    .lightbox.open { display: flex; }
+    .lightbox-inner { background: white; max-width: 860px; width: 100%; display: grid; grid-template-columns: 1fr 220px; animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:scale(0.97)} to{opacity:1;transform:scale(1)} }
+    .lightbox-img { width: 100%; max-height: 82vh; object-fit: contain; display: block; background: #f5f5f3; }
+    .lightbox-side { padding: 2rem 1.6rem; display: flex; flex-direction: column; justify-content: space-between; border-left: 1px solid var(--border); }
+    .lightbox-title { font-family: var(--serif); font-size: 1.35rem; font-style: italic; line-height: 1.3; margin-bottom: 1.2rem; }
+    .lightbox-award { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); border-left: 2px solid var(--accent-light); padding-left: 10px; line-height: 1.5; margin-bottom: 8px; display: block; }
+    .lightbox-close { background: none; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); align-self: flex-end; transition: color 0.2s; }
+    .lightbox-close:hover { color: var(--ink); }
+
+    /* ROBOTICS */
+    .robotics-intro-text { font-size: 1.1rem; color: var(--ink-light); max-width: 680px; line-height: 1.8; font-weight: 300; margin-top: 2.5rem; margin-bottom: 4rem; }
+    .stats-row { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid var(--border); margin-bottom: 4rem; }
+    .stat-item { padding: 2rem 1.5rem; border-right: 1px solid var(--border); text-align: center; }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: var(--serif); font-size: 3rem; font-weight: 500; line-height: 1; margin-bottom: 0.5rem; }
+    .stat-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+
+    .competitions-table { width: 100%; border-collapse: collapse; }
+    .competitions-table thead tr { border-bottom: 2px solid var(--ink); }
+    .competitions-table th { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); padding: 0.75rem 1rem 0.75rem 0; text-align: left; }
+    .competitions-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    .competitions-table tbody tr:hover { background: rgba(0,0,0,0.02); }
+    .competitions-table td { padding: 1.1rem 1rem 1.1rem 0; vertical-align: top; }
+    .comp-name-cell { font-family: var(--serif); font-size: 1rem; font-style: italic; }
+    .comp-rank-cell { font-size: 0.8rem; color: var(--ink-light); white-space: nowrap; }
+    .comp-awards-cell { display: flex; flex-direction: column; gap: 5px; }
+    .comp-award-pill { display: inline-block; font-size: 0.66rem; font-weight: 500; letter-spacing: 0.05em; padding: 3px 10px; background: var(--accent-light); color: var(--accent); width: fit-content; }
+    .state-row { background: rgba(184,92,56,0.04) !important; }
+    .state-row .comp-name-cell { color: var(--accent); }
+
+    /* FOOTER */
+    .footer-wrap { max-width: 1200px; margin: 0 auto; padding: 2.2rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+    .footer-name { font-family: var(--serif); font-style: italic; font-size: 1rem; }
+    .footer-note { font-size: 0.72rem; color: var(--ink-muted); letter-spacing: 0.05em; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1rem; }
+      .hero { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; min-height: auto; }
+      .hero-image-wrap { order: -1; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .section { padding: 3.5rem 1.5rem; }
+      .stats-row { grid-template-columns: repeat(2,1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: 1px solid var(--border); }
+      .lightbox-inner { grid-template-columns: 1fr; }
+      .lightbox-side { border-left: none; border-top: 1px solid var(--border); }
+      .footer-wrap { flex-direction: column; gap: 0.4rem; text-align: center; padding: 2rem 1.5rem; }
+      .competitions-table th:nth-child(2), .competitions-table td:nth-child(2) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Jackie's World</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#artwork">Artwork</a></li>
+    <li><a href="#robotics">Robotics</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Art · Robotics · New Hampshire</p>
+    <h1 class="hero-title">Creating,<br><em>Building,</em><br>Inspiring.</h1>
+    <p class="hero-desc">Hi, I'm Jackie — an elementary school student who loves to draw and build robots. This is my little corner of the internet where I share what I make and do.</p>
+    <div class="hero-links">
+      <a href="#artwork" class="link-primary">View Artwork</a>
+      <a href="#robotics" class="link-secondary">Robotics Season</a>
+    </div>
+  </div>
+  <div class="hero-image-wrap">
+    <img class="hero-photo" src="images/about.jpg" alt="Jackie"/>
+    <p class="hero-caption">Create · Build · Inspire</p>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<div class="section" id="about">
+  <p class="section-label">About Me</p>
+  <h2 class="section-title">Hi, I'm <em>Jackie.</em></h2>
+  <div class="about-grid">
+    <img class="about-photo" src="images/about.jpg" alt="Jackie"/>
+    <div class="about-text">
+      <p>I live in New Hampshire, and I'm an elementary school student. I love drawing and robotics — maybe that sounds like a funny combination, but that's just me!</p>
+      <p>I hope you enjoy my drawings and my robotics adventures. This is my little corner of the internet where I share the things I love to make and do.</p>
+      <p>Whether I'm sketching a new idea or programming a robot for competition, I believe that every great thing starts with curiosity and a willingness to try.</p>
+      <div class="about-tags">
+        <span class="about-tag">Artist</span>
+        <span class="about-tag">Robotics Builder</span>
+        <span class="about-tag">Award Winner</span>
+        <span class="about-tag">Elementary Student</span>
+        <span class="about-tag">New Hampshire</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- ARTWORK -->
+<div class="section" id="artwork">
+  <div class="artwork-header">
+    <div>
+      <p class="section-label">Gallery</p>
+      <h2 class="section-title">My <em>Artwork</em></h2>
+    </div>
+    <div class="year-tabs">
+      <button class="year-tab active" onclick="setYear(this,'2026')">2026</button>
+      <button class="year-tab" onclick="setYear(this,'2025')">2025</button>
+      <button class="year-tab" onclick="setYear(this,'2024')">2024</button>
+    </div>
+  </div>
+
+  <!-- 2026 -->
+  <div class="artwork-year-panel active" id="panel-2026">
+    <div class="artwork-grid">
+      <div class="artwork-card" onclick="openLightbox('images/birthday_cake.jpg','My Birthday Cake',[])">
+        <img class="artwork-thumb" src="images/birthday_cake.jpg" alt="My Birthday Cake" loading="lazy"/>
+        <div class="artwork-overlay"><div class="overlay-title">My Birthday Cake</div></div>
+        <div class="artwork-info"><div class="artwork-title">My Birthday Cake</div><p class="artwork-desc">A cheerful acrylic painting of a pink drip cake piled high with whipped cream rosettes and bright red cherries, set against a bubbly yellow-green background. I painted this to celebrate my birthday — every cherry on top represents something sweet about the year!</p></div>
+      </div>
+      <div class="artwork-card" onclick="openLightbox('images/snakehead.jpg','Invasion of the Snakehead',['Fish Art Contest 2026 — 1st Place State Winner (New Hampshire)'])">
+        <img class="artwork-thumb" src="images/snakehead.jpg" alt="Invasion of the Snakehead" loading="lazy"/>
+        <div class="artwork-overlay">
+          <div class="overlay-title">Invasion of the Snakehead</div>
+          <div class="overlay-badge">Fish Art Contest 2026 — 1st Place State Winner (New Hampshire)</div>
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-title">Invasion of the Snakehead</div>
+          <p class="artwork-desc">I learned that snakeheads are invasive fish threatening New Hampshire's native species like rainbow trout and brook trout. I drew the snakehead front and center, looking powerful and a little scary, while the native fish it threatens swim nearby. I wanted people to see how serious this problem is for our local waterways.</p>
+          <span class="artwork-award-item">Fish Art Contest 2026 — 1st Place State Winner (New Hampshire)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2025 -->
+  <div class="artwork-year-panel" id="panel-2025">
+    <div class="artwork-grid">
+
+      <div class="artwork-card" onclick="openLightbox('images/starry_fins.jpg','Starry Fins and Fairy Wings',['Picasso International Art Contest 2025 — Star Artist (Highest Honor)'])">
+        <img class="artwork-thumb" src="images/starry_fins.jpg" alt="Starry Fins and Fairy Wings" loading="lazy"/>
+        <div class="artwork-overlay">
+          <div class="overlay-title">Starry Fins and Fairy Wings</div>
+          <div class="overlay-badge">Picasso Int'l Art Contest 2025 — Star Artist</div>
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-title">Starry Fins and Fairy Wings</div>
+          <p class="artwork-desc">I love betta fish and I love Van Gogh's Starry Night, so I combined them! A brilliant betta fish swims through a swirling night sky while a tiny fairy fishes from a crescent moon above. I drew every single fin ray by hand with colored pencil — it took a very long time but I'm so happy with how it turned out.</p>
+          <span class="artwork-award-item">Picasso Int'l Art Contest 2025 — Star Artist (Highest Honor)</span>
+        </div>
+      </div>
+
+      <div class="artwork-card" onclick="openLightbox('images/sunset_symphony.jpg','Sunset Symphony of The Sea',['Celebrating Art Contest (National) 2025 — High Merit','Marine Art Contest (National) 2025 — Honorable Mention','NAMEPA (National) 2025 — Finalist & Featured in 2026 Calendar'])">
+        <img class="artwork-thumb" src="images/sunset_symphony.jpg" alt="Sunset Symphony of The Sea" loading="lazy"/>
+        <div class="artwork-overlay">
+          <div class="overlay-title">Sunset Symphony of The Sea</div>
+          <div class="overlay-badge">Celebrating Art 2025 — High Merit</div>
+          <div class="overlay-badge">NAMEPA 2025 — Finalist & 2026 Calendar</div>
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-title">Sunset Symphony of The Sea</div>
+          <p class="artwork-desc">Three orca whales leap joyfully out of the ocean as the sun melts into the horizon in shades of gold, orange, and red. I wanted to capture that magical moment when the sky and sea almost look like they're on fire. The whales feel free and full of energy — like a symphony playing at the very end of the day.</p>
+          <span class="artwork-award-item">Celebrating Art (National) 2025 — High Merit</span>
+          <span class="artwork-award-item">Marine Art Contest (National) 2025 — Honorable Mention</span>
+          <span class="artwork-award-item">NAMEPA 2025 — Finalist & 2026 Calendar</span>
+        </div>
+      </div>
+
+      <div class="artwork-card" onclick="openLightbox('images/hermione.jpg','Hermione and Crookshanks',[])">
+        <img class="artwork-thumb" src="images/hermione.jpg" alt="Hermione and Crookshanks" loading="lazy"/>
+        <div class="artwork-overlay"><div class="overlay-title">Hermione and Crookshanks</div></div>
+        <div class="artwork-info"><div class="artwork-title">Hermione and Crookshanks</div><p class="artwork-desc">Hermione Granger is one of my favorite characters — smart, brave, and always reading. I drew her in the Hogwarts library in her Gryffindor robes, with her fluffy orange cat Crookshanks sitting on top of an open book. I used colored pencils to get the warm tones of the bookshelves and Crookshanks's fur just right.</p></div>
+      </div>
+
+      <div class="artwork-card" onclick="openLightbox('images/finch_haven.jpg','Blossoming Finch Haven',['Songbird Art Contest 2025 (International) — 1st Prize in Massachusetts'])">
+        <img class="artwork-thumb" src="images/finch_haven.jpg" alt="Blossoming Finch Haven" loading="lazy"/>
+        <div class="artwork-overlay">
+          <div class="overlay-title">Blossoming Finch Haven</div>
+          <div class="overlay-badge">Songbird Art Contest 2025 — 1st Prize in Massachusetts</div>
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-title">Blossoming Finch Haven</div>
+          <p class="artwork-desc">Two purple finches share a quiet moment on a branch, touching beaks as if whispering to each other. I surrounded them with layers of spring flowers, berries, and lush green leaves, mixing watercolor washes with colored pencil details. Finches visit our yard a lot and I wanted to show just how beautiful and gentle they are.</p>
+          <span class="artwork-award-item">Songbird Art Contest 2025 (Int'l) — 1st Prize in Massachusetts</span>
+        </div>
+      </div>
+
+      <div class="artwork-card" onclick="openLightbox('images/mrs_fox.jpg','Fantastic Mrs. Fox',['World Youth Art Competition 2026 (International) — Champion','Celebrating Art Contest (National) 2025 — High Merit','Picasso International Art Contest — Diamond Artist Award'])">
+        <img class="artwork-thumb" src="images/mrs_fox.jpg" alt="Fantastic Mrs. Fox" loading="lazy"/>
+        <div class="artwork-overlay">
+          <div class="overlay-title">Fantastic Mrs. Fox</div>
+          <div class="overlay-badge">World Youth Art Competition 2026 — Champion</div>
+          <div class="overlay-badge">Picasso Int'l — Diamond Artist Award</div>
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-title">Fantastic Mrs. Fox</div>
+          <p class="artwork-desc">Inspired by Roald Dahl's story, this oil pastel painting shows a mother fox and her cub resting in a birch forest surrounded by wildflowers and butterflies. Mrs. Fox looks calm and wise, keeping a watchful eye on her little one. I loved using oil pastels for this piece because they made the fox's orange fur look so warm and rich.</p>
+          <span class="artwork-award-item">World Youth Art Competition 2026 (Int'l) — Champion</span>
+          <span class="artwork-award-item">Celebrating Art (National) 2025 — High Merit</span>
+          <span class="artwork-award-item">Picasso Int'l Art Contest — Diamond Artist Award</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2024 -->
+  <div class="artwork-year-panel" id="panel-2024">
+    <div class="artwork-grid">
+
+      <div class="artwork-card" onclick="openLightbox('images/autumn_lake.jpg','The Little House by the Autumn Lake',[])">
+        <img class="artwork-thumb" src="images/autumn_lake.jpg" alt="The Little House by the Autumn Lake" loading="lazy"/>
+        <div class="artwork-overlay"><div class="overlay-title">The Little House by the Autumn Lake</div></div>
+        <div class="artwork-info"><div class="artwork-title">The Little House by the Autumn Lake</div><p class="artwork-desc">A cozy little white cottage with a red roof nestles among fiery autumn trees beside a calm lake, with snowy mountains rising in the background. I used acrylic paint to capture how fall colors reflect in still water — the mirror image of the orange and yellow trees in the lake is my favorite part of this painting.</p></div>
+      </div>
+
+      <div class="artwork-card" onclick="openLightbox('images/woods_sunset.jpg','Woods In the Sunset',[])">
+        <img class="artwork-thumb" src="images/woods_sunset.jpg" alt="Woods In the Sunset" loading="lazy"/>
+        <div class="artwork-overlay"><div class="overlay-title">Woods In the Sunset</div></div>
+        <div class="artwork-info"><div class="artwork-title">Woods In the Sunset</div><p class="artwork-desc">A stand of white birch trees glows with golden autumn leaves as the last light of day shimmers on a pond behind them. I painted this with acrylics, focusing on the beautiful contrast between the black-and-white birch bark and the explosion of yellow, orange, and green all around. I love birch trees — they always look a little magical to me.</p></div>
+      </div>
+
+      <div class="artwork-card" onclick="openLightbox('images/hummingbird.jpg','The Hummingbird and the Happy Flower',[])">
+        <img class="artwork-thumb" src="images/hummingbird.jpg" alt="The Hummingbird and the Happy Flower" loading="lazy"/>
+        <div class="artwork-overlay"><div class="overlay-title">The Hummingbird and the Happy Flower</div></div>
+        <div class="artwork-info"><div class="artwork-title">The Hummingbird and the Happy Flower</div><p class="artwork-desc">A brilliantly colored hummingbird hovers mid-flight, dipping its long beak into a big red hibiscus flower against a swirling purple sky. I painted this with acrylics and tried to show the energy and speed of a hummingbird — they move so fast, it always amazes me that something so tiny can be so powerful.</p></div>
+      </div>
+
+      <div class="artwork-card" onclick="openLightbox('images/mallard.jpg',&quot;The Mallard's Evening Journey&quot;,['Massachusetts Junior Duck Stamp Contest 2024 — Second Place'])">
+        <img class="artwork-thumb" src="images/mallard.jpg" alt="The Mallard's Evening Journey" loading="lazy"/>
+        <div class="artwork-overlay">
+          <div class="overlay-title">The Mallard's Evening Journey</div>
+          <div class="overlay-badge">Massachusetts Junior Duck Stamp 2024 — 2nd Place</div>
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-title">The Mallard's Evening Journey</div>
+          <p class="artwork-desc">A mallard drake takes flight at dusk over a wetland full of life — a duck and duckling swim below, deer graze at the water's edge, and birds fill the warm evening sky. I drew every feather with colored pencil, which took many hours, but I wanted the wing to look as detailed and real as possible. The wetland habitat reminds me how important it is to protect these places.</p>
+          <span class="artwork-award-item">Massachusetts Junior Duck Stamp Contest 2024 — Second Place</span>
+        </div>
+      </div>
+
+      <div class="artwork-card" onclick="openLightbox('images/peaceful_jungle.jpg','Peaceful Jungle',['Celebrating Art Contest (National) 2024 — High Merit'])">
+        <img class="artwork-thumb" src="images/peaceful_jungle.jpg" alt="Peaceful Jungle" loading="lazy"/>
+        <div class="artwork-overlay">
+          <div class="overlay-title">Peaceful Jungle</div>
+          <div class="overlay-badge">Celebrating Art 2024 — High Merit</div>
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-title">Peaceful Jungle</div>
+          <p class="artwork-desc">A vibrant jungle scene filled with animals living together in harmony — a scarlet macaw, a leopard resting on a branch, a green tree frog by a waterfall, a toucan, and a pink flamingo all share the same colorful world. I wanted to show that even fierce animals can coexist peacefully in nature. I used paint markers and watercolor to make the colors as bright and alive as a real rainforest.</p>
+          <span class="artwork-award-item">Celebrating Art Contest (National) 2024 — High Merit</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+  <div class="lightbox-inner">
+    <img class="lightbox-img" id="lightbox-img" src="" alt=""/>
+    <div class="lightbox-side">
+      <div>
+        <div class="lightbox-title" id="lightbox-title"></div>
+        <div id="lightbox-awards"></div>
+      </div>
+      <button class="lightbox-close" onclick="closeLightbox()">Close ✕</button>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- ROBOTICS -->
+<div class="section" id="robotics">
+  <p class="section-label">VEX IQ · 2025–2026 Season</p>
+  <h2 class="section-title">My <em>Robotics</em> Journey</h2>
+  <p class="robotics-intro-text">My first year in robotics, and it has been an incredible experience. My team and I learned to design and build a robot, write code, drive in competition, and document our progress in an engineering notebook — all while practicing more than 30 hours each week.</p>
+
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-number">9</div><div class="stat-label">Competitions</div></div>
+    <div class="stat-item"><div class="stat-number">7</div><div class="stat-label">Awards Won</div></div>
+    <div class="stat-item"><div class="stat-number">30+</div><div class="stat-label">Hours Per Week</div></div>
+    <div class="stat-item"><div class="stat-number">#1</div><div class="stat-label">Elem. Team at State</div></div>
+  </div>
+
+  <table class="competitions-table">
+    <thead>
+      <tr>
+        <th>Competition</th>
+        <th>Ranking</th>
+        <th>Awards</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="comp-name-cell">Oyster River VEX IQ Mix &amp; Match Scrimmage</td>
+        <td class="comp-rank-cell">First competition ever</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="comp-name-cell">Water Polson VEX IQ Mix &amp; Match Tournament</td>
+        <td class="comp-rank-cell">14 / 39 · Skills 11 / 39</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="comp-name-cell">Oyster River VEX IQ Mix &amp; Match Tournament</td>
+        <td class="comp-rank-cell">3 / 74 · Skills 6 / 74</td>
+        <td class="comp-awards-cell">
+          <span class="comp-award-pill">Excellence Award</span>
+          <span class="comp-award-pill">Teamwork 2nd Place</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="comp-name-cell">Fun in the Sun VEX IQ Signature Event</td>
+        <td class="comp-rank-cell">23 / 64 · Skills 32 / 64</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="comp-name-cell">Hopkinton VEX IQ Mix &amp; Match Qualifier</td>
+        <td class="comp-rank-cell">5 / 31 · Skills 12 / 31</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="comp-name-cell">Sage Park VEX IQ Mix &amp; Match Tournament</td>
+        <td class="comp-rank-cell">1 / 13 · Skills 1 / 13</td>
+        <td class="comp-awards-cell">
+          <span class="comp-award-pill">Excellence Award</span>
+          <span class="comp-award-pill">Teamwork Champion</span>
+          <span class="comp-award-pill">Skills Champion</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="comp-name-cell">iSTEAM VEX IQ Mix &amp; Match Qualifier #1</td>
+        <td class="comp-rank-cell">2 / 25 · Skills 8 / 25</td>
+        <td class="comp-awards-cell"><span class="comp-award-pill">Teamwork 2nd Place</span></td>
+      </tr>
+      <tr>
+        <td class="comp-name-cell">iSTEAM VEX IQ Mix &amp; Match Qualifier #2</td>
+        <td class="comp-rank-cell">3 / 34 · Skills 9 / 27</td>
+        <td class="comp-awards-cell"><span class="comp-award-pill">Excellence Award</span></td>
+      </tr>
+      <tr class="state-row">
+        <td class="comp-name-cell">VEX IQ Massachusetts State Championship</td>
+        <td class="comp-rank-cell">2 / 24 · Skills 9 / 24</td>
+        <td class="comp-awards-cell">
+          <span class="comp-award-pill">#1 Elementary School Team</span>
+          <span class="comp-award-pill">2nd Among All Middle School Teams</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="divider"/>
+<div class="footer-wrap">
+  <span class="footer-name">Jackie's World</span>
+  <span class="footer-note">Art &amp; Robotics · New Hampshire</span>
+</div>
+
+<script>
+  function setYear(btn, year) {
+    document.querySelectorAll('.year-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.artwork-year-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + year).classList.add('active');
+  }
+
+  function openLightbox(src, title, awards) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-img').alt = title;
+    document.getElementById('lightbox-title').textContent = title;
+    document.getElementById('lightbox-awards').innerHTML = awards.map(a => `<span class="lightbox-award">${a}</span>`).join('');
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeLightboxOnBg(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
