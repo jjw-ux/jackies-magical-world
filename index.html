@@ -61,7 +61,7 @@
 
     /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3.5rem; }
-    .about-photo { width: 85%; aspect-ratio: 3/4; object-fit: cover; display: block; }
+    .about-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
     .about-text { padding-top: 1rem; }
     .about-text p { font-size: 1rem; color: var(--ink-light); line-height: 1.8; font-weight: 300; margin-bottom: 1.2rem; }
     .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2rem; }
@@ -162,9 +162,9 @@
 <nav>
   <div class="nav-logo">Jackie's Magical World</div>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
     <li><a href="#artwork">Artwork</a></li>
     <li><a href="#robotics">Robotics</a></li>
+    <li><a href="#about">About</a></li>
   </ul>
 </nav>
 
@@ -184,31 +184,6 @@
     <p class="hero-caption">Create · Build · Inspire</p>
   </div>
 </div>
-
-<hr class="divider"/>
-
-<!-- ABOUT -->
-<div class="section" id="about">
-  <p class="section-label">About Me</p>
-  <h2 class="section-title">Hi, I'm <em>Jackie.</em></h2>
-  <div class="about-grid">
-    <img class="about-photo" src="images/about.jpg" alt="Jackie"/>
-    <div class="about-text">
-      <p>I live in New Hampshire, and I'm an elementary school student. I love drawing and robotics — maybe that sounds like a funny combination, but that's just me!</p>
-      <p>I hope you enjoy my drawings and my robotics adventures. This is my little corner of the internet where I share the things I love to make and do.</p>
-      <p>Whether I'm sketching a new idea or programming a robot for competition, I believe that every great thing starts with curiosity and a willingness to try.</p>
-      <div class="about-tags">
-        <span class="about-tag">Artist</span>
-        <span class="about-tag">Robotics Builder</span>
-        <span class="about-tag">Award Winner</span>
-        <span class="about-tag">Elementary Student</span>
-        <span class="about-tag">New Hampshire</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<hr class="divider"/>
 
 <!-- ARTWORK -->
 <div class="section" id="artwork">
@@ -476,6 +451,29 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<div class="section" id="about">
+  <p class="section-label">About Me</p>
+  <h2 class="section-title">Hi, I'm <em>Jackie.</em></h2>
+  <div class="about-grid">
+    <img class="about-photo" src="images/about.jpg" alt="Jackie"/>
+    <div class="about-text">
+      <p>I live in New Hampshire, and I'm an elementary school student. I love drawing and robotics — maybe that sounds like a funny combination, but that's just me!</p>
+      <p>I hope you enjoy my drawings and my robotics adventures. This is my little corner of the internet where I share the things I love to make and do.</p>
+      <p>Whether I'm sketching a new idea or programming a robot for competition, I believe that every great thing starts with curiosity and a willingness to try.</p>
+      <div class="about-tags">
+        <span class="about-tag">Artist</span>
+        <span class="about-tag">Robotics Builder</span>
+        <span class="about-tag">Award Winner</span>
+        <span class="about-tag">Elementary Student</span>
+        <span class="about-tag">New Hampshire</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <hr class="divider"/>
