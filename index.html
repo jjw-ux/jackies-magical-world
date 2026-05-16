@@ -9,8 +9,8 @@
     :root {
       --cream: #FAF8F4;
       --ink: #1C1C1C;
-      --ink-light: #2A2A2A;
-      --ink-muted: #555550;
+      --ink-light: #555550;
+      --ink-muted: #999890;
       --accent: #B85C38;
       --accent-light: #E8C5B5;
       --border: #E8E6E0;
@@ -201,21 +201,17 @@
       <button class="year-tab active" onclick="setYear(this,'2026')">2026</button>
       <button class="year-tab" onclick="setYear(this,'2025')">2025</button>
       <button class="year-tab" onclick="setYear(this,'2024')">2024</button>
+      <button class="year-tab" onclick="setYear(this,'2023')">2023</button>
     </div>
   </div>
 
   <!-- 2026 -->
   <div class="artwork-year-panel active" id="panel-2026">
     <div class="artwork-grid">
-      <div class="artwork-card" onclick="openLightbox('images/mothers_day.jpg','Happy Mother\'s Day',[])">
-        <img class="artwork-thumb" src="images/mothers_day.jpg" alt="Happy Mother's Day" loading="lazy"/>
-        <div class="artwork-overlay"><div class="overlay-title">Happy Mother's Day</div></div>
-        <div class="artwork-info"><div class="artwork-title">Happy Mother's Day</div><div class="artwork-meta">Colored Pencil · May 2026</div><p class="artwork-desc">A heartfelt Mother's Day gift featuring Peach, my golden retriever puppy, holding a garland of colorful spring flowers in her mouth — daisies, blue cornflowers, pink petals, and lavender blooms. A blue butterfly floats nearby, and the whole scene is framed with little pink hearts. I made this for my mom to show how much she means to me.</p></div>
-      </div>
       <div class="artwork-card" onclick="openLightbox('images/jellyfish.jpg','The Glowing Jellyfish Feast',[])">
         <img class="artwork-thumb" src="images/jellyfish.jpg" alt="The Glowing Jellyfish Feast" loading="lazy"/>
         <div class="artwork-overlay"><div class="overlay-title">The Glowing Jellyfish Feast</div></div>
-        <div class="artwork-info"><div class="artwork-title">The Glowing Jellyfish Feast</div><div class="artwork-meta">Colored Pencil · Apr. 2026</div><p class="artwork-desc">A massive, glowing lion's mane jellyfish drifts through the deep ocean feeding on a moon jellyfish. Its translucent bell shimmers in blue and pink, while golden tentacles trail like ribbons in the current. Tiny jellyfish float in the background alongside colorful coral and sea creatures on the ocean floor. I wanted to capture how mysterious and magical the deep sea feels — like a whole glowing world hidden beneath the waves.</p></div>
+        <div class="artwork-info"><div class="artwork-title">The Glowing Jellyfish Feast</div><div class="artwork-meta">Colored Pencil · 2026</div><p class="artwork-desc">A massive, glowing jellyfish drifts through the deep ocean, its translucent bell shimmering in blue and pink while golden tentacles trail like ribbons in the current. Tiny jellyfish float in the background alongside colorful coral and sea creatures on the ocean floor. I wanted to capture how mysterious and magical the deep sea feels — like a whole glowing world hidden beneath the waves.</p></div>
       </div>
       <div class="artwork-card" onclick="openLightbox('images/birthday_cake.jpg','My Birthday Cake',[])">
         <img class="artwork-thumb" src="images/birthday_cake.jpg" alt="My Birthday Cake" loading="lazy"/>
@@ -359,6 +355,23 @@
 
     </div>
   </div>
+
+  <!-- 2023 -->
+  <div class="artwork-year-panel" id="panel-2023">
+    <div class="artwork-grid">
+
+      <div class="artwork-card" onclick="openLightbox('images/midnight_whiskers.jpg','Midnight Whiskers Over Starry Hamlet',[])">
+        <img class="artwork-thumb" src="images/midnight_whiskers.jpg" alt="Midnight Whiskers Over Starry Hamlet" loading="lazy"/>
+        <div class="artwork-overlay"><div class="overlay-title">Midnight Whiskers Over Starry Hamlet</div></div>
+        <div class="artwork-info">
+          <div class="artwork-title">Midnight Whiskers Over Starry Hamlet</div>
+          <div class="artwork-meta">Acrylic · 2023</div>
+          <p class="artwork-desc">A large black-and-white tuxedo cat gazes upward into a swirling Van Gogh–inspired night sky, towering over a cozy little village below. Spiraling clouds, a glowing crescent moon, and golden stars fill the deep blue sky, while the hamlet beneath twinkles with warm cottage lights and Christmas trees. I painted this in acrylics and loved combining one of my favorite paintings — Starry Night — with the magic of a midnight cat watching over a sleeping town.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <!-- LIGHTBOX -->
@@ -495,7 +508,7 @@
 <div class="footer-wrap">
   <span class="footer-name">Jackie's Magical World</span>
   <span class="footer-note">Art &amp; Robotics · New Hampshire</span>
-  <span class="footer-note">Version 1.0 · Last updated May 12, 2026</span>
+  <span class="footer-note">Version 1.0 · Last updated April 26, 2026</span>
 </div>
 
 <script>
